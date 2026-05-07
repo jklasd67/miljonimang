@@ -1,0 +1,1 @@
+Lihtne to-do rakendus localStorage kasutusega.

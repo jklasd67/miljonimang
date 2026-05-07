@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miljonimang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Arusaamise kontroll</p>
+        <h1>Miljonimang</h1>
+        <p class="subtitle">Mangi labi AI-toega kusimused ja testi, kas moistad lahenduse loogikat.</p>
+      </header>
+
+      <section id="taskView" class="card">
+        <h2>Vali ulesanne</h2>
+        <p class="muted">Ulesannete nimekiri loetakse automaatselt input/ kaustast.</p>
+        <div id="taskList" class="task-list"></div>
+      </section>
+
+      <section id="gameView" class="card hidden">
+        <div class="game-top">
+          <div>
+            <p id="levelLabel" class="pill">Kusimus 1 / 15</p>
+            <h2 id="taskTitle"></h2>
+          </div>
+          <button id="quitBtn" class="secondary">Lopeta mang</button>
+        </div>
+
+        <div class="progress-wrap">
+          <div id="progress" class="progress"></div>
+        </div>
+
+        <aside class="scoreboard">
+          <h3>Punktiastmed</h3>
+          <ol id="levels"></ol>
+          <p class="muted">Turvatasemed: 1 000, 32 000, 1 000 000</p>
+        </aside>
+
+        <article class="question-card">
+          <p id="difficulty" class="difficulty">Lihtne</p>
+          <h3 id="questionText"></h3>
+          <div id="options" class="options"></div>
+        </article>
+
+        <section class="lifelines">
+          <button id="fiftyBtn">50:50</button>
+          <button id="hintBtn">Kusi AI-lt vihjet</button>
+          <button id="audienceBtn">Kusi publikult</button>
+        </section>
+
+        <section id="feedback" class="feedback hidden"></section>
+      </section>
+
+      <section id="resultView" class="card hidden">
+        <h2>Mangu tulemus</h2>
+        <p id="resultSummary"></p>
+        <button id="restartBtn">Mangi uuesti</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

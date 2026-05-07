@@ -1,0 +1,14 @@
+{
+  "name": "miljonimang",
+  "version": "1.0.0",
+  "description": "Miljonimangu stiilis oppelahendusest arusaamise kontroll",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

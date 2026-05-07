@@ -1,0 +1,264 @@
+:root {
+  --bg: #0f172a;
+  --bg-accent: #111827;
+  --surface: #ffffff;
+  --ink: #0b1220;
+  --ink-soft: #4b5563;
+  --primary: #ef4444;
+  --primary-dark: #b91c1c;
+  --ok: #059669;
+  --bad: #dc2626;
+  --line: #d1d5db;
+  --shadow: 0 20px 35px rgba(15, 23, 42, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(140deg, var(--bg) 0%, #1d4ed8 55%, #22d3ee 100%);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent 40%);
+  pointer-events: none;
+}
+
+.app {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.hero {
+  color: #f8fafc;
+  margin-bottom: 1.5rem;
+  animation: slide-in 500ms ease-out;
+}
+
+.eyebrow {
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 0.4rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Fraunces", serif;
+  margin-top: 0;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  color: #e0f2fe;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  animation: rise 420ms ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+.task-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.task-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+
+button {
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 10px;
+  padding: 0.62rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background: #334155;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.game-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pill {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 999px;
+  padding: 0.28rem 0.72rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.progress-wrap {
+  margin: 1rem 0;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 12px;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  transition: width 260ms ease;
+}
+
+.scoreboard {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: #f8fafc;
+  margin-bottom: 1rem;
+}
+
+.scoreboard ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.scoreboard li {
+  padding: 0.2rem 0;
+}
+
+.scoreboard .active {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.question-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+  background: white;
+}
+
+.difficulty {
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.options {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.option {
+  text-align: left;
+  background: #e2e8f0;
+  color: #0b1220;
+}
+
+.option:hover {
+  background: #cbd5e1;
+}
+
+.feedback {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border-radius: 10px;
+}
+
+.feedback.correct {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.feedback.wrong {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.lifelines {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .game-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+}
