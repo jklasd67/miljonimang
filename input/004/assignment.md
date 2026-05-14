@@ -1,12 +1,13 @@
 # HTML-vorm isikuandmete sisestamiseks
 
 ## Eesmärk
-Luua HTML-vorm, mis võtab kasutajalt nime ja e-maili, valideerib sisendi ja saadab serverile.
+Luua HTML-vorm, mis võtab kasutajalt nime ja e-maili, kontrollib sisendi ning saadab andmed serverile JSON-kujul.
 
 ## Nõuded
-- Form peab sisaldama name ja email väljad.
-- Käivitamisel kontrollida, et mõlemad väljad on täidetud.
+- Vorm peab sisaldama name ja email väljad.
+- Tühjad väljad tuleb enne saatmist kinni püüda.
 - Vale e-maili formaat peab tagastama veateate.
 - Submit-nupul peab olema preventDefault.
-- Vastus serverile peab olema JSON-kujul POST meetodiga.
+- Päring peab olema POST meetodil ja JSON-kehaga.
+- Serveri vastus peab olema JSON-kujul ja vead peavad jõudma kasutajani arusaadava sõnumina.
 - Validatsioon peab olema nii klient- kui ka serveripoolne.

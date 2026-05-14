@@ -1,1 +1,1 @@
-Lihtne to-do rakendus localStorage kasutusega.
+Lihtne to-do andmete salvestuse ülesanne JSON-failiga.

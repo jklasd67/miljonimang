@@ -22,6 +22,12 @@ You will receive:
   - levels 1-5: easy
   - levels 6-10: medium
   - levels 11-15: hard
+- Keep all answer options grammatically correct, equally polished, and similar in length and complexity.
+- Do not make the correct answer stand out by sounding more academic, more technical, more complete, or more detailed than the distractors.
+- Wrong answers should be plausible, topic-related, and based on common misconceptions or nearby ideas.
+- Avoid absurd, funny, off-topic, or obviously broken distractors.
+- Make sure the wording, rhythm, punctuation, and terminology of the options feel like they could come from the same author.
+- The learner should need to understand the concept, not guess the right option from style cues.
 
 ## Coverage requirements
 Include questions about:

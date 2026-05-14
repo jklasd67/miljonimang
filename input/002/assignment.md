@@ -1,9 +1,11 @@
 # JSON-andmete kuvamine
 
 ## Eesmärk
-Kuvada andmed JSON-failist kaardivaates.
+Kuvada JSON-allikast laaditud andmed kaardivaates nii, et andmete laadimine ja nende kuvamine oleksid eraldi sammud.
 
 ## Nõuded
 - Kasuta fetch API-t andmete laadimiseks.
-- Vea korral kuva kasutajale teade.
-- Kasuta funktsioone andmete renderdamiseks.
+- Andmete laadimine ja renderdamine peavad olema eraldi funktsioonides.
+- Iga kirje tuleb kuvada eraldi kaardina või artiklina.
+- Vea korral kuva kasutajale selge teade, mitte tühi leht.
+- Lahendus peab taluma ka olukorda, kus andmeid on vähe või päring ebaõnnestub.

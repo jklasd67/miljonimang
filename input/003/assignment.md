@@ -1,9 +1,11 @@
-# To-do list localStorage'iga
+# To-do andmete salvestus
 
 ## Eesmärk
-Luua to-do rakendus, mis salvestab tegevused brauseri localStorage-sse.
+Luua to-do rakenduse andmeloogika, mis laeb olemasolevad tegevused JSON-failist ja salvestab muudatused sinna tagasi.
 
 ## Nõuded
-- Kasutaja saab lisada, märkida tehtuks ja kustutada tegevusi.
-- Andmed säilivad pärast lehe värskendamist.
-- Kood peab olema loetav ja funktsioonideks jaotatud.
+- Olemasolevad andmed tuleb JSON-failist laadida.
+- Kui faili pole, peab lahendus käituma tühja loendiga.
+- Muudetud loend tuleb tagasi faili kirjutada JSON-kujul.
+- Kood peab olema jaotatud väikesteks, selgete nimedega funktsioonideks.
+- Lugemisel ja salvestamisel peab andmestruktuur jääma samaks.
