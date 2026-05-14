@@ -1,7 +1,7 @@
-# Miljonimang
+# Miljonimäng
 
 ## Projekti kirjeldus
-Miljonimang on veebirakendus, mis kontrollib, kas õppija saab aru ülesande lahendusest.
+Miljonimäng on veebirakendus, mis kontrollib, kas õppija saab aru ülesande lahendusest.
 Küsimused luuakse assignment.md ja lahendusfailide põhjal ning mäng järgib miljonimängu loogikat.
 
 ## Kasutatud tehnoloogiad

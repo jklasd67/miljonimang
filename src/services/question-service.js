@@ -4,16 +4,16 @@ const path = require("path");
 const PROMPT_FILE = path.join(__dirname, "..", "..", "prompts", "question-generation.md");
 
 const TECH_PATTERNS = [
-  { key: "addEventListener", label: "DOM sundmuste kasitlemine" },
-  { key: "innerHTML", label: "DOM-i sisestamine innerHTML kaudu" },
-  { key: "localStorage", label: "andmete salvestus brauseri localStorage-s" },
+  { key: "addEventListener", label: "DOM-sündmuste käsitlemine" },
+  { key: "innerHTML", label: "DOM-i sisu lisamine innerHTML kaudu" },
+  { key: "localStorage", label: "andmete salvestamine brauseri localStorage'is" },
   { key: "fetch(", label: "andmete toomine fetch API-ga" },
-  { key: "JSON.parse", label: "JSON andmete parsimine" },
-  { key: "JSON.stringify", label: "JSON serialiseerimine" },
+  { key: "JSON.parse", label: "JSON-andmete parsimine" },
+  { key: "JSON.stringify", label: "JSON-serialiseerimine" },
   { key: "try", label: "veahaldus try/catch abil" },
-  { key: "async", label: "asunkroonne loogika" },
-  { key: "await", label: "asunkroonsete kutsete ootamine" },
-  { key: "querySelector", label: "DOM elementide valik querySelector-iga" },
+  { key: "async", label: "asünkroonne loogika" },
+  { key: "await", label: "asünkroonsete kutsete ootamine" },
+  { key: "querySelector", label: "DOM-elementide valik querySelector-iga" },
 ];
 
 function shuffle(list) {
@@ -35,7 +35,7 @@ function collectText(task) {
 function detectTechnologies(task) {
   const fullText = collectText(task);
   const found = TECH_PATTERNS.filter((pattern) => fullText.includes(pattern.key.toLowerCase()));
-  return found.length ? found : [{ label: "uldised programmeerimisvood", key: "general" }];
+  return found.length ? found : [{ label: "üldised programmeerimisvõtted", key: "general" }];
 }
 
 function firstLines(markdown, count = 8) {
@@ -56,196 +56,219 @@ function buildFallbackQuestions(task) {
   const pool = [
     {
       difficulty: "easy",
-      question: `Mis on ulesande \"${title}\" peamine eesmärk?`,
+      question: `Mis on ülesande "${title}" peamine eesmärk?`,
       options: [
-        "Ainult failide olemasolu kontrollimine",
-        "Lahenduse funktsionaalsuse ja nouete taitmise kinnitamine",
-        "Serveri operatsioonisusteemi uuendamine",
-        "CSS failide minimeerimine",
+        "Veenduda, et lahendus täidab kõik assignment.md nõuded",
+        "Kontrollida, kas serverikood kasutas õigeid funktsioone",
+        "Testida, kas failide nimed vastavad konventsioonile",
+        "Verifitseerida, et kood kasutab standardset HTML-struktuuri",
       ],
-      correctIndex: 1,
-      explanation: "assignment.md kirjeldab eesmarki ja nouete taitmist, mitte ainult failide olemasolu.",
+      correctIndex: 0,
+      explanation: "Hindamine keskendub sellele, kas lahendus vastab ülesande nõuetele.",
     },
     {
       difficulty: "easy",
-      question: "Miks on assignment.md selle rakenduse jaoks oluline?",
+      question: "Miks on assignment.md hindamise jaoks oluline?",
       options: [
-        "Selles on ainult juhuslikud markmed",
-        "Selles on ulesande nouded ja hindamiskriteeriumid, mille jargi hinnata",
-        "See asendab koiki lahendusfaile",
-        "See on vajalik ainult deploy jaoks",
+        "Selles on hindamiskriteeriumid ja lahenduse nõuded",
+        "Selles on serveri konfiguratsiooni üksikasjad",
+        "Selles on juhised kasutajaliidese disainiks",
+        "Selles on automaatsed testitulemused",
       ],
-      correctIndex: 1,
-      explanation: "assignment.md annab AI-le ja hindamisloogikale peamise hindamiskonteksti.",
+      correctIndex: 0,
+      explanation: "assignment.md annab hindamise aluseks oleva konteksti: nõuded ja kriteeriumid.",
     },
     {
       difficulty: "easy",
-      question: "Mida annab lahendusfailide kaasamine AI-le?",
+      question: "Mis on lahenduse koodi lugemise roll AI hindamises?",
       options: [
-        "Voimaluse koostada kontseptuaalseid kusimusi reaalse loogika pohjal",
-        "Ainult failinimede meeldejattmise kontrolli",
-        "Voimaluse muuta assignment.md automaatselt",
-        "Vajaduse eemaldada valikvastused",
+        "Näidata, kuidas nõuded reaalselt koodi kaudu realiseeriti",
+        "Kuvada, milliseid funktsioone kasutati",
+        "Kontrollida koodi formaati ja stiili",
+        "Leida, kus asuvad kommentaarid ja metaandmed",
       ],
       correctIndex: 0,
-      explanation: "Lahendusfailid annavad tegeliku implementeeringu, mille pealt saab kontrollida arusaamist.",
+      explanation: "Koodi analüüs paljastab, kas nõuded said tegelikult implementeeritud.",
     },
     {
       difficulty: "easy",
-      question: "Miks peaks AI iga mangu alguses kusimused uuesti looma?",
+      question: "Miks tuleks küsimusi iga mängu alguses varieerida?",
       options: [
-        "Et kasutaja ei saaks ainult vastuseid pahe oppida",
-        "Et server kaivituks kiiremini",
-        "Et assignment.md kustuks",
-        "Et valikvastuseid oleks ainult kaks",
+        "Et vältida olukorda, kus kasutaja õpib vastuseid pähe",
+        "Et koormata serverit rohkem testimise eesmärgil",
+        "Et lühendada hindamise täitmise aega",
+        "Et muuta kasutajaliidese stiili iga käigu jaoks",
       ],
       correctIndex: 0,
-      explanation: "Uute variantide loomine aitab kontrollida sisulist arusaamist, mitte paheoppimist.",
+      explanation: "Variatsioon aitab kontrollida tegelikku arusaamist, mitte meeldejätmist.",
     },
     {
       difficulty: "easy",
-      question: "Miks on igal kusimusel tapselt 4 vastusevarianti?",
+      question: "Miks on nelja valikuvõimaluse kasutamine mängu jaoks otstarbekas?",
       options: [
-        "See toetab miljonimangu formaati ja uhest loogikat",
-        "Sest JavaScript toetab ainult nelja stringi",
-        "Et backend ei peaks JSON-i kasutama",
-        "Et oige vastus oleks alati D",
+        "See järgib Miljonimängu traditsioonilist vormi ja annab piisava valikute hulga",
+        "See tähendab, et õige vastus on alati teatud positsioonil",
+        "See on tingitud JSON-formaadi piirangutest",
+        "See on vajalik CSS paigutuse tõttu",
       ],
       correctIndex: 0,
-      explanation: "Nelja variandiga valikvastus on mangu pohnoue.",
+      explanation: "Neli valikut on piisav kompromiss raskuse ja juhuslikkuse vahel mängu formaadis.",
     },
     {
       difficulty: "medium",
-      question: `Kui lahenduses kasutatakse tehnoloogiat \"${technologies[0].label}\", mida tasub kindlasti kontrollida?`,
+      question: `Kui lahenduses kasutatakse \"${technologies[0].label}\", mida hindamine prioriteetina kontrollida?`,
       options: [
-        "Kas seda kasutatakse ulesande nouetest lahtuvalt oiges kohas",
-        "Kas faili nimi algab tahega Z",
-        "Kas kommentaarid on alati inglise keeles",
-        "Kas brauseri zoom on 100%",
+        "Kas see lahendab ülesande nõudeid ja kasutatud on õigesti",
+        "Kas programmeerija valis selle nime järgi funktsioonile",
+        "Kas HTML leht näitab selle rakendamise tulemuseid",
+        "Kas serveri seadete fail sisaldab selle viiteid",
       ],
       correctIndex: 0,
-      explanation: "Tehnoloogia kasutus peab olema pohjendatud ulesande eesmargiga.",
+      explanation: "Iga tehnoloogia kasutus tuleb valideerida ülesande konteksti vastu.",
     },
     {
       difficulty: "medium",
-      question: "Mis juhtub hindamise kvaliteediga, kui loetakse ainult assignment.md ja mitte lahendusfaile?",
+      question: "Kuidas mõjub hindamise täpsus, kui lugeda ainult assignment.md?",
       options: [
-        "Hindamine paraneb alati",
-        "Hindamine jaab pealiskaudseks, sest tegelik loogika puudub",
-        "Mangu pikkus kahekordistub automaatselt",
-        "Oiged vastused kaovad JSON-ist",
+        "Hindamine jääb pealiskaudseks, sest koodi teostust ei kontrollita",
+        "Hindamine muutub automaatselt täpsemaks andmete põhjal",
+        "Lahenduse serveri osa paraneb iseseisva hindamise kaudu",
+        "Õpilase punktid arvutatakse täpsemalt kui kodeeringuga",
       ],
-      correctIndex: 1,
-      explanation: "Ilma lahenduseta ei saa kontrollida, kuidas nouded tegelikult teostati.",
+      correctIndex: 0,
+      explanation: "Ilma kood analyse ei saa hindamise täielikkust garanteerida.",
     },
     {
       difficulty: "medium",
-      question: "Miks on kasulik failide lugemisel ignoreerida kaustu nagu node_modules voi .git?",
+      question: "Millal on vajalik node_modules ja .git kauste välja jätmine?",
       options: [
-        "Et valtimata mitteseotud ja liiga mahukad failid kontekstist",
-        "Et JavaScript tootaks ainult frontendis",
-        "Et kustutada kasutaja punktid",
-        "Et muuta koik kusimused raskeks",
+        "Et vältida mitteotseselt seotud failide konteksti lisamist",
+        "Et kiirendada serveri käivitamist iga hindamisel",
+        "Et kaitsta kasutaja andmeid failide võrgu ülekande eest",
+        "Et vähendada hindamisteie sooritamise aega",
       ],
       correctIndex: 0,
-      explanation: "Mitteseotud kaustad lisavad mra ja voivad konteksti liiga suureks muuta.",
+      explanation: "Ebaolulised kaustadest lisavad müra ja moonutavad hindamise konteksti.",
     },
     {
       difficulty: "medium",
-      question: "Kuidas aitab raskusastmete jaotus (1-5, 6-10, 11-15) hinnata arusaamist?",
+      question: "Kuidas toetab raskusastmete jaotus õppija arusaamise hindamist?",
       options: [
-        "Liigutakse jarjest sugavama kontseptuaalse moistmise suunas",
-        "Koik kusimused muutuvad juhuslikuks",
-        "Vastused muutuvad automaatselt oigeks",
-        "JSON formaat pole enam vajalik",
+        "See võimaldab eristada algteadmisi, loogiloomust ja analüüsi",
+        "See määrab, kui kiiresti serveri vastused peaksid jõudma",
+        "See tagab, et õpilase punktid kasvavad võrdsete sammudega",
+        "See nõue tuleb brauseri funktsioonide standardit vastu",
       ],
       correctIndex: 0,
-      explanation: "Jaotus voimaldab eristada algteadmisi, loogika moistmist ja susteemset analuusi.",
+      explanation: "Järkjärguline raskenemine eraldab erinevaid arusaamise tasemeid.",
     },
     {
       difficulty: "medium",
       question: hasManyFiles
-        ? "Lahendus on mitmes failis. Milline risk tekib, kui AI analuusib ainult uhte faili?"
-        : "Lahendus on pigem koondatud. Milline samm aitab siiski tervikpilti kontrollida?",
+        ? "Mitme failiga lahendused - milleks on oluline kogu kood analüüsida?"
+        : "Lihtsa lahendusega - kuidas täielik kontroll tagada?",
       options: hasManyFiles
         ? [
-            "Oluline osa loogikast voib kahe silma vahele jaada",
-            "Server jookseb alati kokku",
-            "HTML muutub automaatselt PDF-iks",
-            "Mangu reeglid ei luba enam 4 valikut",
+            "Et vältida oluliste osade jäämist analüüsist tähelepanuta",
+            "Et serveris jooksevad protsessid saaksid käivituse signaalid",
+            "Et kogu andmebaas vormistataks standardsel kujul",
+            "Et brauseri ajalugu kustuks iga hindamise käigus",
           ]
         : [
-            "Kontrollida ka assignment.md nouete vastavust reaalsele loogikale",
-            "Muutke koik funktsioonid globaalseks",
-            "Eemaldada koik veatootlused",
-            "Asendada JSON binaarfailiga",
+            "Kontrollida assignment.md vastavust koodi realiseeringule",
+            "Modifitseerida kõiki JavaScripti funktsioone globaalseks",
+            "Kustutada valikuliselt koodi põhjenduste read",
+            "Kaardistada kõik HTML elemendid andmebaasi tabelisse",
           ],
       correctIndex: 0,
-      explanation: "Hindamine peab katma kogu lahenduse, mitte ainult osa sellest.",
+      explanation: "Terviklik analüüs on vajalik võrgu hindamuse jaoks.",
     },
     {
       difficulty: "hard",
-      question: "Milline praktika parandab mangu skaleeritavust mitme ulesande korral?",
+      question: "Kuidas lahendada skaleeritavuse väljakutse, kui lisada mitut ülesannet?",
       options: [
-        "Ulesannete hoidmine eraldi numbrikaustades ja failide dünaamiline lugemine",
-        "Koigi ulesannete hardcode uhesse faili",
-        "Kusimuste hoidmine ainult pildina",
-        "Ainult manualne valik ilma API-ta",
+        "Kasutada dünaamilist failide lugemist eraldi kaustadest",
+        "Kirjutada kõik ülesanded hardkodeeritud ühte põhifaili",
+        "Salvestada kõik küsimused piltidena serveris",
+        "Nõuda kasutajatelt käsitsi küsimuste valimist",
       ],
       correctIndex: 0,
-      explanation: "Dunaamiline struktuur voimaldab uusi ulesandeid lisada ilma arhitektuuri umberkirjutuseta.",
+      explanation: "Dünaamiline struktuur võimaldab ülesandeid lisada ilma arhitektuuri muutmiseta.",
     },
     {
       difficulty: "hard",
-      question: "Milline turvarisk tekib, kui kasutaja sisend renderdatakse otse innerHTML kaudu?",
+      question: "Milline turvalisuse risk tekib, kui sisend renderdatakse otse?",
       options: [
-        "XSS risk pahatahtliku skripti sisestuse kaudu",
-        "CPU kasutus langeb nulli",
-        "JSON failid muutuvad ainult-loetavaks",
-        "Express lakkab tootamast",
+        "XSS riskid pahatahtlike skriptide injekteerimise kaudu",
+        "CPU kasutamine langeb nulli ja server peatub",
+        "JSON failid muutuvad kirjutuskaitseks ilma muudatuseta",
+        "Express serveri protsess teisaldatakse teisesse pordisse",
       ],
       correctIndex: 0,
-      explanation: "Otse innerHTML kasutus sisendiga voib lubada skripti sustimist.",
+      explanation: "Otse sisendi renderdamine võib XSS rünnakuid võimaldada.",
     },
     {
       difficulty: "hard",
-      question: "Kuidas parandada kusimuste kvaliteeti, et need ei kontrolliks ainult malupohiseid fakte?",
+      question: "Kuidas tõsta küsimuste kvaliteeti faktipõhisest kontrollimisest?",
       options: [
-        "Lisada pohjenduspohised ja veaolukorra kusimused konkreetse loogika kohta",
-        "Kusida ainult faililaiendite kohta",
-        "Eemaldada selgitused vastustelt",
-        "Kasutada alati sama 15 kusimust",
+        "Lisada põhjenduse, andmevoo ja eriolukordade küsimusi",
+        "Päring faili laiendite ja nimetajate kohta ainult",
+        "Eemaldada selgitused korrektse vastuse juurest",
+        "Kasutada igal käigul täpselt sama 15 küsimust",
       ],
       correctIndex: 0,
-      explanation: "Arusaamist kontrollivad pohjenduse, andmevoo ja erijuhtude teemad.",
+      explanation: "Arusaamist kontrollivad põhjendused ja keerulisemad stsenaariumid.",
     },
     {
       difficulty: "hard",
-      question: "Mis annab opilasele koige rohkem oppimisvaartust peale vastamist?",
+      question: "Milline komponent annab õpilasele kõige rohkem õppimist?",
       options: [
-        "Luhike selgitus, miks vastus oli oige voi vale",
-        "Ainult punktisumma ilma tagasisideta",
-        "Lehe automaatne sulgemine",
-        "Juhusliku faili kustutamine",
+        "Selgitus, miks vastus oli õige või vale",
+        "Ainult arvuline tulemus ilma tagasisideta",
+        "Automaatne lehe sulgemine vastuse järel",
+        "Juhuslik failide kustutamine serveri seadetes",
       ],
       correctIndex: 0,
-      explanation: "Selgitus aitab kinnistada kontseptsioone ja parandada arusaamist.",
+      explanation: "Tagasiside selgitused kinnistavad õppimist ja arusaamist.",
     },
     {
       difficulty: "hard",
-      question: `Milline allolev lahenemine vastab koige paremini noudele, et kontekst peab tulema assignment.md ja lahendusfailidest? (${topLines[0] || "ulesande pealkiri"})`,
+      question: `Kuidas kombineerida assignment.md ja koodi optimaalselt? (${topLines[0] || "ülesande kirjeldus"})`,
       options: [
-        "Koondada assignment.md + failide sisu uhtseks prompti sisendiks enne genereerimist",
-        "Saata AI-le ainult faili nimed",
-        "Genereerida kusimused ilma sisendita",
-        "Kasutada ainult eelmise mangu tulemusi",
+        "Koondada mõlemad sisenditeks, enne küsimuste genereerimist",
+        "Saata AI-le ainult failinimede ja kausta struktuuri",
+        "Genereerida küsimused juhuslike andmete järgi",
+        "Kasutada vaid eelmiste katsete tulemuste jagamist",
       ],
       correctIndex: 0,
-      explanation: "Sisuline genereerimine eeldab nii nouete kui ka implementeeringu konteksti.",
+      explanation: "Kombineeritud kontekst tagab kvaliteetse küsimuste genereerimise.",
     },
   ];
 
   return pool;
+}
+
+function shuffleOptions(question) {
+  // Loome indeksite massiivi [0, 1, 2, 3]
+  const indices = [0, 1, 2, 3];
+  
+  // Segame indeksite järjestust
+  for (let i = indices.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  
+  // Uus correctIndex vastab segatud vastuste asukohaele
+  const newCorrectIndex = indices.indexOf(question.correctIndex);
+  
+  // Segame vastused vastavalt uutele indeksitele
+  const shuffledOptions = indices.map(i => question.options[i]);
+  
+  return {
+    ...question,
+    options: shuffledOptions,
+    correctIndex: newCorrectIndex,
+  };
 }
 
 function normalizeQuestion(question, index) {
@@ -265,7 +288,7 @@ function ensureDistribution(questions) {
   const hard = questions.filter((q) => q.difficulty === "hard");
 
   if (easy.length < 5 || medium.length < 5 || hard.length < 5) {
-    throw new Error("Kusimuste raskusastmete jaotus on vigane");
+    throw new Error("Küsimuste raskusastmete jaotus on vigane");
   }
 }
 
@@ -283,8 +306,8 @@ async function maybeGenerateWithAI(task) {
     return null;
   }
 
-  // Koht paris AI integratsiooni jaoks. Kui API voti on olemas,
-  // voib siin teha valise mudeli kutse promptTemplate + task sisendiga.
+  // Koht päris AI-integratsiooni jaoks. Kui API võti on olemas,
+  // võib siin teha valiku mudeli kutse promptTemplate + task sisendiga.
   await buildPromptPayload(task);
   return null;
 }
@@ -299,19 +322,22 @@ async function generateQuestionSet(task) {
   const medium = shuffle(sourceQuestions.filter((q) => q.difficulty === "medium")).slice(0, 5);
   const hard = shuffle(sourceQuestions.filter((q) => q.difficulty === "hard")).slice(0, 5);
 
-  return [...easy, ...medium, ...hard].map(normalizeQuestion);
+  // Segame iga küsimuse vastuseid
+  const allQuestions = [...easy, ...medium, ...hard].map(shuffleOptions);
+  
+  return allQuestions.map(normalizeQuestion);
 }
 
 async function generateHint(question) {
   const hints = [
-    "Motle, milline variant kirjeldab pohjust, mitte pealiskaudset fakti.",
-    "Seosta vastus assignment.md nouetega ja reaalse loogikaga.",
-    "Vaata, milline vastus selgitab kasutaja tegevuse voi andmevoo pohjust.",
-    "Oige vastus on tavaliselt see, mis parandab arusaadavust voi turvalisust.",
+    "Mõtle, milline variant kirjeldab põhjust, mitte pealiskaudset fakti.",
+    "Seosta vastus assignment.md nõuetega ja reaalse loogikaga.",
+    "Vaata, milline vastus selgitab kasutaja tegevuse või andmevoo põhjust.",
+    "Õige vastus on tavaliselt see, mis parandab arusaadavust või turvalisust.",
   ];
 
   if (question?.difficulty === "hard") {
-    return "Motle skaleeritavuse, turvalisuse voi arhitektuuri vaatenurgast.";
+    return "Mõtle skaleeritavuse, turvalisuse või arhitektuuri vaatenurgast.";
   }
 
   return hints[Math.floor(Math.random() * hints.length)];

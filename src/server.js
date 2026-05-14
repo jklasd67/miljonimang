@@ -18,5 +18,5 @@ app.get("/health", (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Miljonimang kaivitus: http://localhost:${PORT}`);
+  console.log(`Miljonimäng käivitus: http://localhost:${PORT}`);
 });

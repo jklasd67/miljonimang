@@ -68,7 +68,7 @@ function renderScoreboard() {
   [...LEVEL_POINTS].reverse().forEach((points, reverseIndex) => {
     const level = LEVEL_POINTS.length - reverseIndex;
     const li = document.createElement("li");
-    li.textContent = `${level}. kusimus - ${points.toLocaleString("et-EE")} punkti`;
+    li.textContent = `${level}. küsimus - ${points.toLocaleString("et-EE")} punkti`;
 
     if (state.currentIndex + 1 === level && !state.ended) {
       li.classList.add("active");
@@ -88,7 +88,7 @@ async function loadTasks() {
   state.tasks = data.tasks || [];
 
   if (!state.tasks.length) {
-    els.taskList.innerHTML = "<p>input/ kaustas ei leitud numbrilisi ulesandeid.</p>";
+    els.taskList.innerHTML = "<p>input/ kaustas ei leitud numbrilisi ülesandeid.</p>";
     return;
   }
 
@@ -115,7 +115,7 @@ async function startGame(taskId) {
   const taskRes = await fetch(`/api/tasks/${taskId}`);
   const taskData = await taskRes.json();
   if (!taskRes.ok) {
-    alert(taskData.error || "Ulesande laadimine ebaonnestus");
+    alert(taskData.error || "Ülesande laadimine ebaõnnestus");
     return;
   }
 
@@ -127,7 +127,7 @@ async function startGame(taskId) {
   const questionData = await questionRes.json();
 
   if (!questionRes.ok) {
-    alert(questionData.error || "Kusimuste genereerimine ebaonnestus");
+    alert(questionData.error || "Küsimuste genereerimine ebaõnnestus");
     return;
   }
 
@@ -154,7 +154,7 @@ function renderQuestion() {
   els.feedback.className = "feedback hidden";
   els.feedback.textContent = "";
 
-  els.levelLabel.textContent = `Kusimus ${state.currentIndex + 1} / 15`;
+  els.levelLabel.textContent = `Küsimus ${state.currentIndex + 1} / 15`;
   els.difficulty.textContent = `Raskus: ${getDifficultyLabel(q.difficulty)}`;
   els.questionText.textContent = q.question;
   els.options.innerHTML = "";
@@ -187,7 +187,7 @@ function answer(index) {
   if (isCorrect) {
     state.score = LEVEL_POINTS[state.currentIndex];
     els.feedback.className = "feedback correct";
-    els.feedback.textContent = `Oige! ${q.explanation}`;
+    els.feedback.textContent = `Õige! ${q.explanation}`;
 
     state.currentIndex += 1;
     state.disabledOptions = [];
@@ -213,11 +213,11 @@ function endGame(won) {
   showView("result");
 
   if (won) {
-    els.resultSummary.textContent = `Suureparane! Labisid koik 15 kusimust ja teenisid ${state.score.toLocaleString("et-EE")} punkti.`;
+    els.resultSummary.textContent = `Suurepärane! Läbisid kõik 15 küsimust ja teenisid ${state.score.toLocaleString("et-EE")} punkti.`;
     return;
   }
 
-  els.resultSummary.textContent = `Mang loppes. Sinu loppskoor on ${state.score.toLocaleString("et-EE")} punkti.`;
+  els.resultSummary.textContent = `Mäng lõppes. Sinu lõppskoor on ${state.score.toLocaleString("et-EE")} punkti.`;
 }
 
 async function useHint() {
@@ -266,12 +266,12 @@ async function useAudience() {
 }
 
 function quitGame() {
-  const confirmed = window.confirm("Kas oled kindel, et soovid mangu pooleli jatta?");
+  const confirmed = window.confirm("Kas oled kindel, et soovid mängu pooleli jätta?");
   if (!confirmed) return;
 
   state.ended = true;
   showView("result");
-  els.resultSummary.textContent = `Mang katkestati. Hetkeskoor: ${state.score.toLocaleString("et-EE")} punkti.`;
+  els.resultSummary.textContent = `Mäng katkestati. Hetkeskoor: ${state.score.toLocaleString("et-EE")} punkti.`;
 }
 
 els.fiftyBtn.addEventListener("click", useFifty);

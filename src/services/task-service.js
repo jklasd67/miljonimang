@@ -83,7 +83,7 @@ async function listTasks() {
 
   for (const id of numericDirs) {
     const assignmentPath = path.join(INPUT_DIR, id, "assignment.md");
-    let title = `Ulesanne ${id}`;
+    let title = `Ülesanne ${id}`;
 
     if (await exists(assignmentPath)) {
       const assignment = await fs.readFile(assignmentPath, "utf8");
@@ -100,21 +100,21 @@ async function loadTaskDetails(taskId) {
   await ensureInputFolder();
 
   const taskPath = buildTaskPath(taskId);
-  if (!(await exists(taskPath))) {
-    const error = new Error(`Ulesannet ID-ga ${taskId} ei leitud`);
+    if (!(await exists(taskPath))) {
+    const error = new Error(`Ülesannet ID-ga ${taskId} ei leitud`);
     error.statusCode = 404;
     throw error;
   }
 
   const assignmentPath = path.join(taskPath, "assignment.md");
   if (!(await exists(assignmentPath))) {
-    const error = new Error(`Ulesande ${taskId} kaustas puudub assignment.md`);
+    const error = new Error(`Ülesande ${taskId} kaustas puudub assignment.md`);
     error.statusCode = 400;
     throw error;
   }
 
   const assignment = await fs.readFile(assignmentPath, "utf8");
-  const title = extractTitle(assignment, `Ulesanne ${taskId}`);
+  const title = extractTitle(assignment, `Ülesanne ${taskId}`);
   const solutionFiles = await walkFiles(taskPath);
 
   return {

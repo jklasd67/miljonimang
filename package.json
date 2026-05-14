@@ -1,7 +1,7 @@
 {
   "name": "miljonimang",
   "version": "1.0.0",
-  "description": "Miljonimangu stiilis oppelahendusest arusaamise kontroll",
+  "description": "Miljonimängu stiilis õppeülesannete arusaamise kontroll",
   "main": "src/server.js",
   "type": "commonjs",
   "scripts": {
