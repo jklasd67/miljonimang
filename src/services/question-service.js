@@ -348,6 +348,7 @@ async function generateQuestionSet(task) {
   const provided = findProvidedQuestions(task);
   if (provided) {
     ensureDistribution(provided);
+    console.log(`Using provided questions.json for task ${task?.id || '<unknown>'}`);
     const shuffled = provided.map(shuffleOptions);
     return shuffled.map(normalizeQuestion);
   }
