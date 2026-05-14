@@ -1006,7 +1006,47 @@ async function maybeGenerateWithAI(task) {
   return null;
 }
 
+function findProvidedQuestions(task) {
+  if (!task || !Array.isArray(task.solutionFiles)) return null;
+
+  const qFile = task.solutionFiles.find((f) => f.path.toLowerCase().endsWith("questions.json"));
+  if (!qFile) return null;
+
+  try {
+    const parsed = JSON.parse(qFile.content);
+    if (!Array.isArray(parsed) || parsed.length !== 15) return null;
+
+    // basic validation: each question should have 4 options and a correctIndex
+    for (const q of parsed) {
+      if (!Array.isArray(q.options) || q.options.length !== 4) return null;
+      if (typeof q.correctIndex !== "number" || q.correctIndex < 0 || q.correctIndex > 3) return null;
+      // ensure textual fields exist
+      if (typeof q.question !== "string" || typeof q.explanation !== "string") return null;
+    }
+
+    return parsed.map((q, idx) => ({
+      level: q.level || idx + 1,
+      difficulty: q.difficulty || (idx < 5 ? "easy" : idx < 10 ? "medium" : "hard"),
+      question: q.question,
+      options: q.options,
+      correctIndex: q.correctIndex,
+      explanation: q.explanation,
+    }));
+  } catch (e) {
+    return null;
+  }
+}
+
 async function generateQuestionSet(task) {
+  // Kui ülesande kaustas on pakutud questions.json, kasutame seda eelistatult
+  const provided = findProvidedQuestions(task);
+  if (provided) {
+    ensureDistribution(provided);
+    console.log(`Using provided questions.json for task ${task?.id || '<unknown>'}`);
+    const shuffled = provided.map(shuffleOptions);
+    return shuffled.map(normalizeQuestion);
+  }
+
   const aiQuestions = await maybeGenerateWithAI(task);
   const sourceQuestions = aiQuestions || buildFallbackQuestions(task);
 
